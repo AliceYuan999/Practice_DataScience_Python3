@@ -140,7 +140,7 @@ Intermedian:
 			print(my_house >= 18 )
 			print(my_house < your_house)
 	
-  6. Boolean Operators : “and” takes two booleans and returns True if both the booleans themselves are True, which means only True and True evaluate to True. “or” works at least one of the booleans is True, which means only False or False results in False. “not” Not True = False, Not False = True, which is useful when you use it to negate results. Notice that not has a higher priority than and and or, it is executed first. Before, the operational operators like < and >= worked with NumPy arrays out of the box. Unfortunately, this is not true for the boolean operators and, or, and not. In NumPy, logical_and(), logical_or() and logical_not() are used.
+  6. Boolean Operators : “and” takes two booleans and returns True if both the booleans themselves are True, which means only True and True evaluate to True. “or” works at least one of the booleans is True, which means only False or False results in False. “not” Not True = False, Not False = True, which is useful when you use it to negate results. Notice that "not" has a higher priority than and and or, it is executed first. Before, the operational operators like " < " and " >= " worked with NumPy arrays out of the box. Unfortunately, this is not true for the boolean operators and, or, and not. In NumPy, logical_and(), logical_or() and logical_not() are used.
 		1. Example “and”
 			x = 12
 			x > 5 and x <15
@@ -152,7 +152,7 @@ Intermedian:
 		3. Example in NumPy
 			import numpy as np
 			np.logical_and(bmi > 21, bmi < 22)
-			bim[np.logical_and(bmi > 21, bmi < 22)]
+			print(bim[np.logical_and(bmi > 21, bmi < 22)])
 	
 		if, else, elif:
 		1. Example:
@@ -180,23 +180,23 @@ Intermedian:
 				print(“z is neither divisible by 2 or by 3”)
 			print out : z is divisible by 2
 
-	7. Filtering pandas DataFrames: Here we ideally use Pandas series, not Pandas DataFrame to filter data. let’s take brics for example. If  we want to select countries with area over 8 million km2. 3 key steps: (1) select the area column; (2), Do comparison on area column; (3) use result to select countries. There are several methods to filter data:
+	7. Filtering pandas DataFrames: Here we ideally use Pandas series, not Pandas DataFrame to filter data. let’s take brics for example. If  we want to select countries with area over 8 million km^2. There are 3 key steps: (1) select the area column; (2) Do comparison on area column; (3) use result to select countries. There are several methods to filter data:
 		1. exmaple:
 			brics[“area”] 			# alternative: brics.loc[:, “area”], brics.iloc[:, 2]
 			brics_h = brics[“area”] > 8
 			print(brics_h) 			# alternative: print(brics[brics[“area” > 8]])
 		2. Example:
-			import bumpy as np
-			np.logical_and(brics[“area”] > 8, brics[“area”] < 10)
-			print(brics[np.logical_and(brics[“area”] > 8, brics[“area”] < 10)])
+			import numpy as np
+			brics_h2 = np.logical_and(brics[“area”] > 8, brics[“area”] < 10)
+			print(brics[brics_h2])		# alternative : (brics[np.logical_and(brics[“area”] > 8, brics[“area”] < 10)])
 
-	8. While Loop:   While loop is similar to if statement to execute the code inside to see if the condition is True, however, as opposed to the if statement, the while loop will continue to execute this code over and over again as long as the condition is True. While loop is like a repeated if statement. 
+	8. While Loop:   While loop is similar to "if statement" to execute the code inside to see if the condition is True, however, as opposed to the if statement, the while loop will continue to execute this code over and over again as long as the condition is True. While loop is like a repeated "if statement". 
 		1. Example:
 			error = 50
 			while error > 1 : 
 				error = error / 4
 				print(error)
-		Fix things by putting an if-else statement inside the while loop.
+		# To avoid while loop working permanently to crash your system, fix things by putting an if-else statement inside the while loop.
 		2. Example 2:
 			offset = -6 
 			while offset !=0 : 
@@ -206,7 +206,7 @@ Intermedian:
 					offset = offset + 1
 				print(offset)
 	
-  9. For loop in list : for variable in sequence and execute the expressions. 
+  	9. For loop in list : for variable in sequence and execute the expressions. 
 		1. Example: 
 			fam = [1.73, 1.68, 1.71, 1.89]
 			for height in fam : 
@@ -214,10 +214,10 @@ Intermedian:
 			height = 1.73
 			height = 1.68 
 			…					# in this solution, you do not need to access to index of the elements. 
-		enumerate() function can print more values than the value itself.
+		# enumerate() function can print more values than the value itself.
 		2. Example :
 			fam = [1.73, 1.68, 1.71, 1.89]
-			for index, height in  enumerate(fam) : 
+			for index, height in enumerate(fam) : 
 				print(“index” + str(index) + “: ” + str(height))
 			index 0 :  1.73
 			index 1 :  1.68 
@@ -225,7 +225,7 @@ Intermedian:
 		# Using a for loop to iterate over a list only gives you access to every list element in each run, one after the other. If you also want to access the index information, so where the list element you're iterating over is located, you can use enumerate().
 		3. Example :
 			for c in “family” : 
-				print(c.capitalize())
+				print(c.capitalize())		# capitalize() function makes the letters capital
 				F
 				A
 				M
@@ -236,7 +236,7 @@ Intermedian:
      				    	["kitchen", 18.0], 
        				        ["living room", 20.0], 
       					["bedroom", 10.75], 
-        					["bathroom", 9.50]
+        				["bathroom", 9.50]
 									]
 			for h, a in enumerate(house) :
   				  print( "room" + str(h + 1) + ": " + "the " + str(a[0]) + " is " + str(a[1]) + " sqm")
@@ -246,16 +246,16 @@ Intermedian:
 			room4: the bedroom is 10.75 sqm
 			room5: the bathroom is 9.5 sqm
 	
-  10. Loop data structures in dictionary : if you want to apply loop function in a dictionary, you should use items() function 
+  	10. Loop data structures in dictionary : if you want to apply "for loop " function in a dictionary, you should use items() function 
 		1. Example:
 			world = { “afghanistan” : 30.55, “albania” : 2.77, “algeria” : 39.21 }
 			for key, value in world.items() :   		# the key and value is arbitrary, it dose not matter what variable gets here, you can use, k and v as well
 				print(key + “ — ” + str(value))
 			afghanistan — 30.55 
-			albania — 2.77
-			algeria — 9.21			# dictionary is unordered 
-	
-  11. Loop data structures in NumPy Arrays : If you're dealing with a 1D NumPy array, looping over all elements can be as simple as:
+			algeria — 9.21	
+			albania — 2.77			# notice: dictionary is unordered 
+				
+ 	11. Loop data structures in NumPy Arrays : If you're dealing with a 1D NumPy array, looping over all elements can be as simple as:
 		1. Example:
 			import numpy as np
 			np_height = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
@@ -267,7 +267,7 @@ Intermedian:
 			20.975
 			……
 	
-  12. Loop data structures in 2D NumPy Arrays : If you're dealing with a 2D NumPy array, it's more complicated. A 2D array is built up of multiple 1D arrays. To explicitly iterate over all separate elements of a multi-dimensional array, you'll need this syntax: np.nditer()
+ 	 12. Loop data structures in 2D NumPy Arrays : If you're dealing with a 2D NumPy array, it's more complicated. A 2D array is built up of multiple 1D arrays. To explicitly iterate over all separate elements of a multi-dimensional array, you'll need this syntax: np.nditer()
 		1. Example :
 			import numpy as np
 			np_height = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
@@ -277,36 +277,40 @@ Intermedian:
 				print(val)
 			1.73
 			1.68
-			…			# first all height then all the wights.		
+			…			# first all height and then all the wights.		
 	
-  13. Loop data structures in Pandas DataFrame : we use iterrows() function to Pandas DataFrame. The data is divided into two pieces, the label of the row and then the actual data in the row as a Pandas Series.
+ 	 13. Loop data structures in Pandas DataFrame : we use iterrows() function to Pandas DataFrame. The data is divided into two pieces, the label of the row and then the actual data in the row as a Pandas Series.
 		1. Example:
 			import pandas as pd
 			brics = pd.read_csv(“brics.csv”, index_col = 0 )
 			for lab, row in brics.iterrows() : 
 				print(lab)
 				print(row)
-				# print lab and row separately 
-				print(lab + “: ” + row[“capital”])
-				# add a new column to the data frame, len() is the function to calculate the number of characters in a string. 
-				brics.loc[lab, “name_length”] = len(row[“country”])
-				cars.loc[lab, "COUNTRY"] = str.upper(row[“country"])
-				# a more efficient way to do above is apply() function
-				brics[“name_length”] = brics[“country”].apply(len)
-				cars[“COUNTRY”] = cars[“country”].apply(str.upper)
+			
+			# print lab and row separately 
+			print(lab + “: ” + row[“capital”])
+			
+			# add a new column to the data frame, len() is the function to calculate the number of characters in a string. 
+			brics.loc[lab, “name_length”] = len(row[“country”])
+			cars.loc[lab, "COUNTRY"] = str.upper(row[“country"])
+				
+			# a more efficient way to do above is using apply() function
+			brics[“name_length”] = brics[“country”].apply(len)
+			cars[“COUNTRY”] = cars[“country”].apply(str.upper)
 
 	14. Random Numbers: Use randomness to simulate a game. All the functionality you need is contained in the random package, a sub-package of numpy. In this exercise, you'll be using two functions from this package:
-* seed(): sets the random seed, so that your results are reproducible between simulations. As an argument, it takes an integer of your choosing. If you call the function, no output will be generated. (Use this function, you can lock the result of randomness)
-* rand(): if you don't specify any arguments, it generates a random float between zero and one.
+	* seed(): sets the random seed, so that your results are reproducible between simulations. As an argument, it takes an integer of your choosing. If you call the function, no output will be generated. (Use this function, you can get the same result of randomness, pseu-randomness)
+	* rand(): if you don't specify any arguments, it generates a random float between zero and one.
 		1. Example:
 			import numpy as np
 			np.random.seed(123)
 			x = np.ramdom.rand()
 			print(x)
-			# randint(), also a function of the random package, to generate integers randomly. The following call generates the integer 4, 5, 6 or 7 randomly. 8 is not included.
+			# randint(), is also a function of the random package, to generate integers randomly. The following call generates the integer 4, 5, 6 or 7 randomly. 8 is not included.
 			import numpy as np
 			np.random.randint(4, 8)
 		2. Example :
+			step = 50
 			if dice <= 2 :
   				  step = step - 1
 			elif dice <= 5:
@@ -316,7 +320,7 @@ Intermedian:
 			print(dice)
 			print(step)
 	
-  15. Random Walk:  range() function generates a list of number that you can use to iterate over.
+  	15. Random Walk:  range() function generates a list of number that you can use to iterate over.
 		1. Example:
 			import numpy as np
 			np.random.seed(123)
@@ -327,15 +331,18 @@ Intermedian:
 					outcomes.append(“heads”)
 				else : 
 					outcomes.append(”tails”)
-				print(outcomes)					# this is not random walk, just a bunch of random step, to do a random walk as examaple 2
+				print(outcomes)					
+		
+		# above is not random walk, just a bunch of random step, to do a random walk as examaple 2
 		2. Example :
 			import numpy as np
-			np.random.seed(123) # if you want to lock the resluts
+			np.random.seed(123) 			# if you do not want to repete the resluts, you can negelate this statement
 			tails = [0]
 			for x in range(10) :
    				 y = np.random.randint(0, 2)
   			  	tails.append(tails[x] + y)
 			print(tails)
+			
 		3. Example 
 			import numpy as np
 			np.random.seed(123)
@@ -363,7 +370,7 @@ Intermedian:
 				# show the plot
 				plt.show()
 	
-  16. Distribution:  
+  16. Distribution: we use histogram to distribute data, i.e. plt.hist()
 		1. Example:
 			import numpy as np
 			import matplotlib.pyplot as plt
@@ -377,6 +384,7 @@ Intermedian:
 				final_tails.append(tails[-1])
 			plt.hist(final_tails, bins = 10)
 			plt.show()
+			
 		2. Exmaple :
 			# numpy and matplotlib imported, seed set.
 			# initialize and populate all_walks
@@ -387,7 +395,7 @@ Intermedian:
        				 step = random_walk[-1]
        				 dice = np.random.randint(1,7)
       				  if dice <= 2:
-            				step = max(0, step - 1)
+            				step = max(0, step - 1)		# to avoid the step is less than 0, we use max() function here
         				  elif dice <= 5:
             				step = step + 1
         				  else:
