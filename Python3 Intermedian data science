@@ -132,7 +132,7 @@ Intermedian:
 				brics.iloc[[1, 2, 3], [0, 1]]
 				or brics.iloc[ : , [0, 1]]
   
-  5. Comparison Operators: != means inequality, <=, >=, ==,  always make sure that you make comparisons between objects of the same type. Remember that for string comparison, Python determines the relationship based on alphabetical order.
+  5. Comparison Operators: != means inequality,<=(less and equal to), >= (large and equal to ), == (equal to); always make sure that you make comparisons between objects of the same type. Remember that for string comparison, Python determines the relationship based on alphabetical order.
 		 1. Example 
 			import numpy as np
 			my_house = np.array([18.0, 20.0, 10.75, 9.50])
