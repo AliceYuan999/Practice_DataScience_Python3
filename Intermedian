@@ -1,0 +1,412 @@
+Data Science Python3 Learning Blog:
+
+Intermedian:
+1. Data visualisation : Explore Data and Visualise Data
+    1.  Matplotlib: With matplotlib, we can create a bunch of different plots in Python. The plot function tells Python what to plot and how to plot it.  Matplotlib is the mother of visualisation packages. Line plot is the most basic plot and one sub-package from matplotlib is pyplot which we usually import as plt, like this: import matplotlib.pyplot as plt. 
+            1. Example: 
+				import matplot.pyplot as plt
+				year = [1950, 1970, 1990, 2010]
+				pop = [2.519, 3.692, 5.263, 6.972]
+			# if you want to add more data, you can simply use plus sign
+				year = [1800, 1850, 1900] + year
+				pop = [1.0, 1.262, 1.650] + pop
+			# there are arguments in bracket, the first one corresponds to the horizontal axis, and the second one to the vertical axis.
+				plt.plot(year, pop)
+			# label function, title function, 
+				plt.xlabel(“Year”)
+				plt.ylabel(“Population”)
+				plt.title(“World Population Projections”)
+			# if you want to make y-axis start from zero, you can do this:
+				plt.yticks([0, 2, 4, 6, 8, 10])		
+			# to make y-axis clear about billions, we can add a second argument to the yticks function, which is a list with the display names of the tick:
+				plt.yticks([0, 2, 4, 6, 8, 10], [‘0’, ‘2B’, ‘4B’, ‘6B’, ‘8B’, ’10B’])
+			# if you want to make the data on a logarithmic scale, add the line
+				plt.xscale(‘log’)
+				plt.yscale(‘log’)
+			# show function is used to display the plot
+				plt.show()
+			# in addition to plot function, scatter function plots all individual data points and python doesn’t connect the dots with a line
+				plt.scatter(year, pop)
+			# if you want the size of dots corresponds to the population, you can add s argument for size. like this:
+				import numpy as np
+				np_pop = np.array(pop)
+				np_pop = np_pop * 2
+				plt.scatter(year, pop, s = np_pop)
+				plt.show()
+			# if you want to add colour to the plot, add c = col to the argument of plt.scatter(), and add alpha argument to set opacity of bubbles (0-1, 0 is transparent), before doing that, a dictionary should be constructed that maps continents onto colors (talk later):
+				dict = {
+    						'Asia':'red',
+   						 'Europe':'green',
+    						'Africa':'blue',
+    						'Americas':'yellow',
+   					        'Oceania':'black'
+					     }
+				plt.scatter(year, pop, s = np_pop, c = col, alpha = 0.8)
+			# if you want to add text in the plot, you can call text function:
+				plt.text(1550, 71, ‘India’)
+				plt.text(5700, 80, ‘China’)
+			# if you want gridlines on the plot, you can do this:
+				plt.grid(True)
+
+    2. Histogram: with Histogram, you can explore data set and get idea about distribution. To build a histogram, you can divide a value into equal chunks called bins and draw a bar for each bin. The height of the bar corresponds to the number of data in this bin. We can also use matplotlib to build histograms by calling histogram function, like this: plt.hist(x, bins=10). x represent the value you want to build a histogram for, and bins tells Python how many bins the data should be divided. If you don’t specify the bins argument, it will be 10 by default. However, before we use histogram function, we should import matplotlib first like this: import matplotlib.pyplot as plt. If we need more information about plt.hist, we can call help function like this: help(plt.hist).
+        1. Examples:
+			import matplotlib.pyplot as plt
+			value = [0, 0.6, 1.4, 1.6, 2.2, 2.5, 2.6, 3.2, 3.5, 3.9, 4.2, 6]
+			plt.hist(value, bins= 3)
+			plt.show()
+		# if you have to make two plots in a value list, you can call plt.clf() which can be applied to clean the previous plot so that you can start afresh
+			plt.clf()
+			plt.hist(value, bins = 10)
+			plt.show()
+		# if you want to make histogram comparison for two lists, you can use plt.show() and plt.clf() commands:
+			import matplotlib.pyplot as plt
+			plt.hist(value 1, bins = 15)
+			plt.show()
+			plt.clf()
+
+			plt.hist(value 2, bins = 15)
+			plt.show()
+			plt.clf()
+		
+
+    3. Dictionaries: to use dictionary, we use curly brackets ({}) and we have a bunch of what called key : value pairs, like this: list = {“key1” : “value1”, “key2” : “value2”}. If we pass a key in list like this list [“key1”] = , we will get the corresponding value1, i.e. list[“key1”] = “value1”.
+        1. Example 
+			europe = {‘spain’ : ‘madrid’, ‘france’ : ‘paris’, ‘germany’ : ‘berilin’, ‘norway’ : ‘oslo’}
+		# if you want to check out which keys are in europe, you can call key() method on europe:
+			print(europe.key())
+		# if you want to add new elements in a existed dictionary:		
+			europe['iceland'] = 'reykjavik'
+		# if you want to check the result, you can write 
+			print('italy' in europe)
+			 True	
+		# if you want to update a value to a key:
+			europe['iceland'] = ‘Reykjavik'
+		# if you want to remove a key and value:
+			del(europe['iceland’])
+		# there is another version of dictionary where the keys are still the country names, but the values are dictionaries that contain more information than just the capital, like this:
+			europe = { 
+						'spain': { 'capital':'madrid', 'population':46.77 },
+        					        'france': { 'capital':'paris', 'population':66.03 },
+         				        'germany': { 'capital':'berlin', 'population':80.62 },
+       					        'norway': { 'capital':'oslo', 'population':5.084 } 
+					}
+		 # if you want to find the capital of France :
+			print(europe[‘france’][‘capital’])
+			paris
+		# if you want to add a new key to this dictionary:
+			europe[‘italy’] = {‘capital’ : ‘rome’, ‘population’ : ’59.83’}
+
+    4. Pandas: Pandas is an open source library, providing high-performance, easy-to-use data structures and data analysis tools for Python. Then DataFrame is one of Pandas’ most important data structures, which can be used as a rectangular data structure, where we can label the rows and the columns. There are two methods to call DataFrame: the first one is from dictionary, like this:
+			dict = { 
+					"country":["Brazil", "Russia", "India", "China", "South Africa"],
+					"capital":["Brasilia", "Moscow", "New Delhi", "Beijing", "Pretoria"],
+					"area":[8.516, 17.10, 3.286, 9.597, 1.221],
+					"population":[200.4, 143.5, 1252, 1357, 52.98] 
+				    }
+			import pandas as pd
+			brics = pd.DataFrame(dict)
+		# pandas assigned some automatic row labels, 0 up to 4, you can specify them manually by this:
+			bricks.index = [‘BR’, ‘RU’, ‘IN’, ‘CH’, ‘SA’]
+		The second way to call DataFrame is by importing data from an external file like this: brics = pd.read_csv(“path/to/brics.csv”, index_col = 0)
+	
+		How to select data from DataFrame? There are two methods: (1) square brackets; (2) loc and iloc. The difference of (1) and (2) is, the former can only select columns(by “”) or rows(by slide), but the later can select columns and rows at the same time.
+		 (1) square brackets: The single bracket version gives a Pandas Series, the double bracket version gives a Pandas DataFrame.
+			# to get column in series form:
+				brics[“country”, “capital”]
+			# to get column in DataFrame Form:
+				brics[[“country”, “capital”]]
+			#  to get rows in series form:
+				brics[1:4]   Pay attention: You can only select rows using square brackets if you specify a slice, like 1:4. Also, you're using the integer indexes of the rows here, not the row labels!
+		(2) loc and iloc
+			# loc (label-based) in series form:
+				brics.loc[“RU”, “IN”, “CH”]
+				cars.loc['IN', 'cars_per_cap']
+			# loc (label-based) in DataFrame form:
+				brics.loc[[“RU”,  “IN”, “CH”]]
+			# if you want to select specific row and columns in loc (label-based):
+				brics.loc[[“RU”,  “IN”, “CH”], [“country”, “capital”]]
+				or brics.loc[:, [“country”, “capital”]]
+			# iloc (integer position-based)in DataFrame form:
+				brics.iloc[[1, 2, 3]]
+			 # if you want to select specific row and columns in iloc (integer position-based):
+				brics.iloc[[1, 2, 3], [0, 1]]
+				or brics.iloc[ : , [0, 1]]
+  
+  5. Comparison Operators: != means inequality, <=, >=, ==,  always make sure that you make comparisons between objects of the same type. Remember that for string comparison, Python determines the relationship based on alphabetical order.
+		 1. Example 
+			import numpy as np
+			my_house = np.array([18.0, 20.0, 10.75, 9.50])
+			your_house = np.array([14.0, 24.0, 14.25, 9.0])
+			print(my_house >= 18 )
+			print(my_house < your_house)
+	
+  6. Boolean Operators : “and” takes two booleans and returns True if both the booleans themselves are True, which means only True and True evaluate to True. “or” works at least one of the booleans is True, which means only False or False results in False. “not” Not True = False, Not False = True, which is useful when you use it to negate results. Notice that not has a higher priority than and and or, it is executed first. Before, the operational operators like < and >= worked with NumPy arrays out of the box. Unfortunately, this is not true for the boolean operators and, or, and not. In NumPy, logical_and(), logical_or() and logical_not() are used.
+		1. Example “and”
+			x = 12
+			x > 5 and x <15
+			True 
+		2. Example “or”
+			y = 5
+			y < 7 or y > 13
+			True
+		3. Example in NumPy
+			import numpy as np
+			np.logical_and(bmi > 21, bmi < 22)
+			bim[np.logical_and(bmi > 21, bmi < 22)]
+	
+		if, else, elif:
+		1. Example:
+			z = 5
+			if z % 2 ==0 : 
+				print(“ z is even ”)
+			else : 
+				print(“ z is odd ”)
+		2. Example :
+			z = 3
+			if z % 2 == 0 : 
+				print( “ z is even ” )				# False
+			elif z % 3 ==0 : 
+				print( “z is divisible by 3”) 		# True
+			else : 
+				print(“z is neither divisible by 2 or by 3”)
+			print out : z is divisible by 3
+		3. Exmaple:
+			z = 6
+			if z % 2 == 0 : 
+				print( “ z is even ” )				# True
+			elif z % 3 ==0 : 
+				print( “z is divisible by 3”) 		# Never reached
+			else : 
+				print(“z is neither divisible by 2 or by 3”)
+			print out : z is divisible by 2
+
+	7. Filtering pandas DataFrames: Here we ideally use Pandas series, not Pandas DataFrame to filter data. let’s take brics for example. If  we want to select countries with area over 8 million km2. 3 key steps: (1) select the area column; (2), Do comparison on area column; (3) use result to select countries. There are several methods to filter data:
+		1. exmaple:
+			brics[“area”] 			# alternative: brics.loc[:, “area”], brics.iloc[:, 2]
+			brics_h = brics[“area”] > 8
+			print(brics_h) 			# alternative: print(brics[brics[“area” > 8]])
+		2. Example:
+			import bumpy as np
+			np.logical_and(brics[“area”] > 8, brics[“area”] < 10)
+			print(brics[np.logical_and(brics[“area”] > 8, brics[“area”] < 10)])
+
+	8. While Loop:   While loop is similar to if statement to execute the code inside to see if the condition is True, however, as opposed to the if statement, the while loop will continue to execute this code over and over again as long as the condition is True. While loop is like a repeated if statement. 
+		1. Example:
+			error = 50
+			while error > 1 : 
+				error = error / 4
+				print(error)
+		Fix things by putting an if-else statement inside the while loop.
+		2. Example 2:
+			offset = -6 
+			while offset !=0 : 
+				if offset > 0 :
+					offset = offset - 1
+				else :
+					offset = offset + 1
+				print(offset)
+	
+  9. For loop in list : for variable in sequence and execute the expressions. 
+		1. Example: 
+			fam = [1.73, 1.68, 1.71, 1.89]
+			for height in fam : 
+				print(height)
+			height = 1.73
+			height = 1.68 
+			…					# in this solution, you do not need to access to index of the elements. 
+		enumerate() function can print more values than the value itself.
+		2. Example :
+			fam = [1.73, 1.68, 1.71, 1.89]
+			for index, height in  enumerate(fam) : 
+				print(“index” + str(index) + “: ” + str(height))
+			index 0 :  1.73
+			index 1 :  1.68 
+			…
+		# Using a for loop to iterate over a list only gives you access to every list element in each run, one after the other. If you also want to access the index information, so where the list element you're iterating over is located, you can use enumerate().
+		3. Example :
+			for c in “family” : 
+				print(c.capitalize())
+				F
+				A
+				M
+				…
+		4. example ：	
+			house = [
+					["hallway", 11.25], 
+     				    	["kitchen", 18.0], 
+       				        ["living room", 20.0], 
+      					["bedroom", 10.75], 
+        					["bathroom", 9.50]
+									]
+			for h, a in enumerate(house) :
+  				  print( "room" + str(h + 1) + ": " + "the " + str(a[0]) + " is " + str(a[1]) + " sqm")
+			room1: the hallway is 11.25 sqm
+			room2: the kitchen is 18.0 sqm
+			room3: the living room is 20.0 sqm
+			room4: the bedroom is 10.75 sqm
+			room5: the bathroom is 9.5 sqm
+	
+  10. Loop data structures in dictionary : if you want to apply loop function in a dictionary, you should use items() function 
+		1. Example:
+			world = { “afghanistan” : 30.55, “albania” : 2.77, “algeria” : 39.21 }
+			for key, value in world.items() :   		# the key and value is arbitrary, it dose not matter what variable gets here, you can use, k and v as well
+				print(key + “ — ” + str(value))
+			afghanistan — 30.55 
+			albania — 2.77
+			algeria — 9.21			# dictionary is unordered 
+	
+  11. Loop data structures in NumPy Arrays : If you're dealing with a 1D NumPy array, looping over all elements can be as simple as:
+		1. Example:
+			import numpy as np
+			np_height = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
+			np_weight = np. array([65.4, 59.2, 63.6, 88.4, 68.7])
+			bim = np_weight / np_height **2
+			for val in bim : 
+				print(val)
+			21.852
+			20.975
+			……
+	
+  12. Loop data structures in 2D NumPy Arrays : If you're dealing with a 2D NumPy array, it's more complicated. A 2D array is built up of multiple 1D arrays. To explicitly iterate over all separate elements of a multi-dimensional array, you'll need this syntax: np.nditer()
+		1. Example :
+			import numpy as np
+			np_height = np.array([1.73, 1.68, 1.71, 1.89, 1.79])
+			np_weight = np. array([65.4, 59.2, 63.6, 88.4, 68.7])
+			meas = np.array([np_height, np_weight])
+			for val in np.nditer(meas) : 
+				print(val)
+			1.73
+			1.68
+			…			# first all height then all the wights.		
+	
+  13. Loop data structures in Pandas DataFrame : we use iterrows() function to Pandas DataFrame. The data is divided into two pieces, the label of the row and then the actual data in the row as a Pandas Series.
+		1. Example:
+			import pandas as pd
+			brics = pd.read_csv(“brics.csv”, index_col = 0 )
+			for lab, row in brics.iterrows() : 
+				print(lab)
+				print(row)
+				# print lab and row separately 
+				print(lab + “: ” + row[“capital”])
+				# add a new column to the data frame, len() is the function to calculate the number of characters in a string. 
+				brics.loc[lab, “name_length”] = len(row[“country”])
+				cars.loc[lab, "COUNTRY"] = str.upper(row[“country"])
+				# a more efficient way to do above is apply() function
+				brics[“name_length”] = brics[“country”].apply(len)
+				cars[“COUNTRY”] = cars[“country”].apply(str.upper)
+
+	14. Random Numbers: Use randomness to simulate a game. All the functionality you need is contained in the random package, a sub-package of numpy. In this exercise, you'll be using two functions from this package:
+* seed(): sets the random seed, so that your results are reproducible between simulations. As an argument, it takes an integer of your choosing. If you call the function, no output will be generated. (Use this function, you can lock the result of randomness)
+* rand(): if you don't specify any arguments, it generates a random float between zero and one.
+		1. Example:
+			import numpy as np
+			np.random.seed(123)
+			x = np.ramdom.rand()
+			print(x)
+			# randint(), also a function of the random package, to generate integers randomly. The following call generates the integer 4, 5, 6 or 7 randomly. 8 is not included.
+			import numpy as np
+			np.random.randint(4, 8)
+		2. Example :
+			if dice <= 2 :
+  				  step = step - 1
+			elif dice <= 5:
+  				  step = step + 1
+			else :
+   				 step = step + np.random.randint(1,7)
+			print(dice)
+			print(step)
+	
+  15. Random Walk:  range() function generates a list of number that you can use to iterate over.
+		1. Example:
+			import numpy as np
+			np.random.seed(123)
+			outcomes = []
+			for x in range(10) :
+				coin = np.random.randint(0, 2)
+				if coin == 0 :
+					outcomes.append(“heads”)
+				else : 
+					outcomes.append(”tails”)
+				print(outcomes)					# this is not random walk, just a bunch of random step, to do a random walk as examaple 2
+		2. Example :
+			import numpy as np
+			np.random.seed(123) # if you want to lock the resluts
+			tails = [0]
+			for x in range(10) :
+   				 y = np.random.randint(0, 2)
+  			  	tails.append(tails[x] + y)
+			print(tails)
+		3. Example 
+			import numpy as np
+			np.random.seed(123)
+			# initialize random_walk
+			random_walk = [0]
+			# for loop in range(100)
+			for x in range(100) :
+   				 # set step is the last number of random_walk
+   				 step = random_walk[-1]
+    				# roll the dice
+   				 dice = np.random.randint(1, 7)
+    				# determine next step
+   				 if dice <= 2 :
+        					step = max(0, step - 1)
+    				elif dice <= 5 :
+       					 step = step + 1
+    				else :
+       					 step = step + np.random.randint(1, 7)
+    				# append next_step to random_walk
+    					random_walk.append(step)
+				# import matplotlib.pyplot after for loop
+				import matplotlib.pyplot as plt
+				#plot random_walk
+				plt.plot(random_walk)
+				# show the plot
+				plt.show()
+	
+  16. Distribution:  
+		1. Example:
+			import numpy as np
+			import matplotlib.pyplot as plt
+			np.random.seed(123)
+			final_tails = []
+			for x in range(100) : 
+				tails = []
+				for x in range(10) : 
+					coin = np.random.randint(0,2)
+					tails.append(tails[x] + coin )
+				final_tails.append(tails[-1])
+			plt.hist(final_tails, bins = 10)
+			plt.show()
+		2. Exmaple :
+			# numpy and matplotlib imported, seed set.
+			# initialize and populate all_walks
+			all_walks = []
+			for i in range(10) :
+ 				   random_walk = [0]
+  				  for x in range(100) :
+       				 step = random_walk[-1]
+       				 dice = np.random.randint(1,7)
+      				  if dice <= 2:
+            				step = max(0, step - 1)
+        				  elif dice <= 5:
+            				step = step + 1
+        				  else:
+            				step = step + np.random.randint(1,7)
+        				# Implement clumsiness
+      					  if np.random.rand() <= 0.001 :
+          					  step = 0
+				random_walk.append(step)
+  			        all_walks.append(random_walk)
+			# Convert all_walks to NumPy array: np_aw
+				np_aw = np.array(all_walks)
+			# Plot np_aw and show
+				plt.plot(np_aw)
+				plt.show()
+			# Clear the figure
+				plt.clf()
+			# Transpose np_aw: np_aw_t
+				np_aw_t = np.transpose(np_aw)
+			# Plot np_aw_t and show
+				plt.plot(np_aw_t)
+				plt.show()
+
