@@ -1,27 +1,25 @@
-Flash_card_1
-DataFrames
+Flash_card_1: Data Manipulation with pandas
 
 
-Flash_card_2
-consider DataFrame.nobel_winners contains 853 rows, one for each nobel prize winner, and 3 columns: name, prize and year.
-
-         name             prize        year
-0       M.Curie         Physics       1903
-1       A. Einstein     Physics       1921
-...
-851     A. Fleming      Medicine      1945
-852     M. L. King      Peace         1964
+Flash_card_2 : DataFrames
+DatfFrames are tabular data structures, where each observations is a row and each variable is a column. Consider DataFrame.nobel_winners contains 853 rows, one for each nobel prize winner, and 3 columns: name, prize and year.
+                           name             prize        year
+                  0       M.Curie         Physics       1903
+                  1       A. Einstein     Physics       1921
+                  ...
+                  851     A. Fleming      Medicine      1945
+                  852     M. L. King      Peace         1964
 Values within a single colum are of the same data type, but different columns can contain different data type.
 
 
-Flash_card_3
+Flash_card_3 : Exploring DataFrames
 .head() function displays the first few observations, like this: nobel_winner.head()
 .info() function displays the name, data type, and number of missing values for each column, like this: nobel_winner.info()
 .shap attribute returns a tuple of the number of rows followed by the number of columns. since .shape is an attribute and not a method, it dose not require parentheese, like this: nobel_winner.shape
 .describe() methond returns summary statistics for numeric columns, including the mean and median values. (count is the number of non-missing values in the column)
 
 
-Flash_card_4
+Flash_card_4 : Components of a DataFrame
 DataFrames consist of three components accessible through DataFrame attributes:
     .value attribute extracts the data values in the form of a 2D Numpy array. 
         nobel_winner.value
@@ -40,8 +38,7 @@ DataFrames consist of three components accessible through DataFrame attributes:
             RangeIndex(start=0, stop=852, 1)
             
 
-Flash_card_5
-Sorting DataFrames on a single column
+Flash_card_5: Sorting DataFrames on a single column
     .sort_values() method passes the column name to sort by as an argument.
         nobel_winner.sort_values('year')
                        name                 prize               year
