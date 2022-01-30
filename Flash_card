@@ -1,0 +1,70 @@
+Flash_card_1
+DataFrames
+
+
+Flash_card_2
+consider DataFrame.nobel_winners contains 853 rows, one for each nobel prize winner, and 3 columns: name, prize and year.
+
+         name             prize        year
+0       M.Curie         Physics       1903
+1       A. Einstein     Physics       1921
+...
+851     A. Fleming      Medicine      1945
+852     M. L. King      Peace         1964
+Values within a single colum are of the same data type, but different columns can contain different data type.
+
+
+Flash_card_3
+.head() function displays the first few observations, like this: nobel_winner.head()
+.info() function displays the name, data type, and number of missing values for each column, like this: nobel_winner.info()
+.shap attribute returns a tuple of the number of rows followed by the number of columns. since .shape is an attribute and not a method, it dose not require parentheese, like this: nobel_winner.shape
+.describe() methond returns summary statistics for numeric columns, including the mean and median values. (count is the number of non-missing values in the column)
+
+
+Flash_card_4
+DataFrames consist of three components accessible through DataFrame attributes:
+    .value attribute extracts the data values in the form of a 2D Numpy array. 
+        nobel_winner.value
+            [[" M.Curie", "Physics ", 1903],
+            [ "A. Einstein", "Physics", 1921]
+            ...
+              "A. Fleming", "Medicine", 1945],
+              "M. L. King, "Peace", 1964]]
+
+    .columns attribute returns the column names.
+        nobel_winner.columns
+            Index(['name', 'prize', 'year'], dtype = 'object')
+            
+    .index attribute returns the row labels. For nobel_winner, the labels are sequential integers from 0 to 852 in stels of 1.
+        nobel_winner.index
+            RangeIndex(start=0, stop=852, 1)
+            
+
+Flash_card_5
+Sorting DataFrames on a single column
+    .sort_values() method passes the column name to sort by as an argument.
+        nobel_winner.sort_values('year')
+                       name                 prize               year
+            0        E. von Behring         Medicine            1901
+            1          H. Dunant            Peace               1901
+            2       J. H. van't Hoff        Chemistry           1901
+            3          F. Passy             Peace               1901
+            4          S. Prudhomme         Literature          1901
+            ...        ...                  ...                 ...
+       # .sort_values() sorts in ascending order by default. To sort in descending order, set ascending = FALSE
+            nobel_winner.sort_values('year', ascending = FALSE)
+                       name                 prize               year
+            0        O. Smithies.           Medicine            2007
+            1        M. J. Evans            Medicine            2007
+            2         G. Ertl               Chemistry           2007
+            3         A. Gore               Peace               2007
+            4        D. Lessing             Literature          2007
+            ...        ...                  ...                 ...
+             
+
+
+
+
+
+
+        
