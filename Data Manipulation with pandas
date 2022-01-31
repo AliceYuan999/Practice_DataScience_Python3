@@ -1,0 +1,23 @@
+Data Manipulation with pandas
+Chapter 1 : DataFrames
+    1. Sorting and subsetting 
+        * .head() returns the first few rows (the “head” of the DataFrame).
+        * .info() shows information on each of the columns, such as the data type and number of missing values.
+        * .shape returns the number of rows and columns of the DataFrame.
+        * .describe() calculates a few summary statistics for each column.
+        * .values: A two-dimensional NumPy array of values.
+        * .columns: An index of columns: the column names.
+        * .index: An index for the rows: either row numbers or row names.
+
+	
+        * .sort_values() can be used to sort rows by passing a column name.
+            * One column : df.sort_values(“breed”)
+            * Multiple columns : df.sort_values([“breed”, “weignt_kg”])	
+            * When working with data, you may not need all of the variables in your dataset. Square brackets ([]) can be used to select only the columns that matter to you in an order that makes sense to you.  Like this : df[“col_a”]
+            * To select "col_a" and "col_b" of df, use df[["col_a", "col_b”]]
+
+        * filtering rows or selecting rows
+            * dogs[dogs["height_cm"] > 60]
+            * dogs[dogs["color"] == "tan"]
+            * dogs[(dogs["height_cm"] > 60) & (dogs["color"] == "tan")]
+            * 
