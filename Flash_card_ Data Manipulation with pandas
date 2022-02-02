@@ -57,7 +57,11 @@ Flash_card_5: Sorting DataFrames on a single column
             3         A. Gore               Peace               2007
             4        D. Lessing             Literature          2007
             ...        ...                  ...                 ...
-             
+        
+        
+Flash_card_6: Sorting DataFrames on multiple columns
+     .sort_value() can passes a list of column names. The first column will be sorted first and then the second and so on.
+        nobel_winner.sort_values(['year', 'prize'])
 
 
 
