@@ -8,16 +8,27 @@ Chapter 1 : DataFrames
         * .values: A two-dimensional NumPy array of values.
         * .columns: An index of columns: the column names.
         * .index: An index for the rows: either row numbers or row names.
-
+	
 	
         * .sort_values() can be used to sort rows by passing a column name.
-            * One column : df.sort_values(“breed”)
-            * Multiple columns : df.sort_values([“breed”, “weignt_kg”])	
-            * When working with data, you may not need all of the variables in your dataset. Square brackets ([]) can be used to select only the columns that matter to you in an order that makes sense to you.  Like this : df[“col_a”]
-            * To select "col_a" and "col_b" of df, use df[["col_a", "col_b”]]
+            * One column : df.sort_values(“breed”, ascending = False)
+            * Multiple columns : df.sort_values([“breed”, “weignt_kg”], ascending = [True, False])	
+            * To select subset of DataFrame columns, follow the DataFrame name with square brackets containing the name of the columns: df[“col_a”]
+            * To subset multiple columns , pass a list of column names to the square brackets  df[["col_a", "col_b”]]
 
-        * filtering rows or selecting rows
+        * Subsetting DataFrames on a single condition: Rows are often subset using a logical condition to perform filtering. To create a condition, use square brackets to substitute the column to filter on, then compare it to a value using a comparison operator.
             * dogs[dogs["height_cm"] > 60]
             * dogs[dogs["color"] == "tan"]
+
+        * You can combine multiple conditions s=using the comparison operation & (and) and | (or).
             * dogs[(dogs["height_cm"] > 60) & (dogs["color"] == "tan")]
-            * 
+            * mountains[(mountains[“height_m”] > 8600) | (mountains[“ascent”] > “1956-01-01”)]
+
+        * .isin() method is used to subset DataFrame rows containing one of multiple values of a categorical variable
+            * south_mid_atlantic = homelessness[homelessness["region"].isin(["South Atlantic", "Mid-Atlantic"])]
+            * colors = ["brown", "black", "tan”]; condition = dogs["color"].isin(colors); dogs[condition]
+
+    2. Creating new columns
+        * Adding new DataFrame columns
+            * mountains[“hight_km”] = mountains[“hight_m”]/1000
+
