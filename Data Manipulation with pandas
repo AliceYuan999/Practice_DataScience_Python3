@@ -32,3 +32,69 @@ Chapter 1 : DataFrames
         * Adding new DataFrame columns
             * mountains[“hight_km”] = mountains[“hight_m”]/1000
 
+Chapter 2: Aggregating Data
+    1. Summary statistics
+        * .mean() method compute the “center” of a DataFrame column. Like this: sales[‘profit’].mean()
+        * .min() method returns the minimum values.
+        * .max() method returns the maximum values.
+        * .median() method returns the median values.
+        * .mode() method returns the mode.
+        * .std() computes the standard deviation 
+        * .var() computes variance.
+        * .sum() computes column sums.
+        * .quantile() calculates quantiles.
+
+        * .agg() DataFrame method allows you to compute custom summary statistics. Like this: salse[‘profit’].agg(function). For instance: salse[‘profit’].agg(iqr)        # "IQR" is short for inter-quartile range, which is the 75th percentile minus the 25th percentile. 
+            * To compute the same statistic on multiple columns, subset multiple columns using double square brackets before the .agg() call.
+                * salse[[‘sold’, ‘profit’]].agg(pct95)
+            * To compute different summary statistics at the same time.
+                * sales[‘profit’].agg([pct70, pct95])
+
+        * .cumsum() method performs a cumulative sum on a column. It returns one number for every row of the DataFrame, where the first number is the first value, the second is the sum of the first and the second, and so on. Like this: sales[‘profit’].cumsum()
+        * .cummin() for the cumulative minimum.
+        * .cummax() for the cumulative maximum.
+        * .cumprod() for the cumulative product.
+
+        * .drop_duplicates() method drops rows containing duplicated information from a DataFrame. The column used to identify duplicates is specified in the stebset arg. 
+            * Like this: sales.drop_duplicates(subset = ‘color’)
+        * To drop rows based on multiple columns, pass subset a list of column names. This will drop rows if there is already a row with the same values in the specified columns. 
+            * Like this: sales.drop_duplicates(subset = [‘type’, color])
+
+
+    2. Counting 
+        *  .value_counts() method returns the count of unique values in a column.
+            * sales[‘type’].value_counts()
+        * Setting the argument sort=True will order the counts from highest to lowest.
+            * sales[‘type’].value_counts(sort = True)
+        * The normalize argument turns the counts into proportions of the total.
+            * sales[‘type’].value_counts(normalize = True)
+
+    3. Grouped summary statistics
+        * .groupby() takes the column name to group by as an argument. The subset the column to summarise with square brackets and call the summary statistic method. 
+            * sales.groupby(‘type’)[‘sold’].max
+        * Like ungrouped statistics, you can use .agg() to calculate multiple summary statistics on each group. To do this, pass .agg() a list of functions to use.
+            * sales.groupby(‘type’)[‘sold’].agg([max, sum])
+        * The group by multiple columns, pass a list of column names to .groupby(). Then subset the values of interest and call a summary statistic method.
+            * sales.groupby([‘type’, ‘color’])[‘sole’].sum()
+        * You can also group by multiple columns and aggregate by multiple columns. To do this, subset the desired columns using double square brackets after .groupby()
+            * Sales.groupby([‘type’, ‘color’])[[‘sold’, ‘profit’]].sum()
+
+        * .pivot_table() method allows you to calculate summary statistics on different groups, similarly to .groupby(). Pass the column to group by to the index agreement and the column to summarise to values. By default, .pivot_table() calculates the mean for each group.
+            * sales.pivot_table(values=‘sold’, index=‘type’)
+        *  By default, .pivot_table() calculates the mean for each group, but you can also pass an alternative function to the aggfunc argument
+            * sales.pivot_table(values=‘sold’, index=‘type’, aggfunc=np.median)
+        * To calculate multiple summary statistics, pass aggfunc a list of functions to use.
+            * sales.pivot_table(values=‘sold’, index=‘type’, aggfunc=[np.mean, np.median])
+
+        * Pivoting on two variables: Pass the first column to group by to the index argument, the second column to group by to columns, and the column to summarise to values. NaN values fill the spaces where data is missing.
+            * sales.pivot_table(values=‘sold’, index=‘type’, columns= ‘color’)
+        * The NaN  values in the pivot table can be replaced with a values specified by the fill_value argument.
+            * sales.pivot_table(values=‘sold’, index=‘type’, columns=‘color’, fill_values=0)
+        * Setting the argument margins=True will create a new column and row containing the mean of the values in that column or row (not including missing values.)
+            * Sales.pivot_table(values=‘sold’, index=‘’type, columns= ‘color’, margins = True)
+
+
+
+
+
+
