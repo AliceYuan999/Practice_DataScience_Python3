@@ -93,7 +93,46 @@ Chapter 2: Aggregating Data
         * Setting the argument margins=True will create a new column and row containing the mean of the values in that column or row (not including missing values.)
             * Sales.pivot_table(values=‘sold’, index=‘’type, columns= ‘color’, margins = True)
 
+Chapter 3 : Slicing and Indexing Data
+    1. Subsetting using slicing
+        * .set_index() allows you to subset rows with less code.
+            * sales.set_index(‘type’).head
+            * temperatures_ind = temperatures.set_index('city')
+        * To reset the index to sequential integers, call the .reset_index() method
+            * sales.reset_index().head
+            * print(temperatures_ind.reset_index())
+        * To drop the index column form the DataFrame, pass drop=True to .reset_index()
+            * sales.reset_index(drop=True).head()
+            * print(temperatures_ind.reset_index(drop=True))
 
+        * You can include multiple columns in the DataFrame index by tasing a list of columns to .set_index(). These are called multi-level indexes, or hierarchical indexes.
+            * sales.set_index([‘type’, ‘color’]).head()
+
+        * To subset a row with a particular index, call .loc[] on the DataFrame and pass it the index to subset.
+            * sales.loc[‘shoes’]
+        * To subset multiple indexes, pass .loc[] a list of indexes 
+            * sales.loc[[‘shorts’, ‘ shoes’]]
+        * To subset inners level, pass .loc[] a list of tuples. Each tuple should specify which outer and inner levels are required for the row to be included in the subset
+            * sales.loc[[(‘shirt’, ‘black’), (‘shoes, ‘white’’)]]
+
+        * .sort_index() sorts all index levels from outer to inner in ascending order.
+            * sales.sort_index()
+        * To modify the sorting behaviour, pass the levels argument a list of levels in the order that they should be sorted. Then pass ascending a list of Booleans indicate the ordering direction for each level
+            * sales.sort_index(level=[‘color’, ‘type’], ascending = [True, False])
+
+        * Similar to lists, DataFrame rows and columns can be sliced. To slice a DataFrame, the index must first be sorted busing .sort_index(). To slice rows at the outer index level, call .loc[] on the DataFrame and pass it the first and last index values separated by a :. Like lists, the final value is included in the slice.  #	You can only slice an index if the index is sorted (using .sort_index()).
+            * sales.loc[‘shoes’ : ‘shorts’]       #	To slice at the outer level, first and last can be strings. If you pass a single slice to .loc[], it will slice the rows
+        * To slice inner index levels, you must pass the first and last index values as tuples. #To slice at inner levels, first and last should be tuples.
+            * sales.loc[(‘shirt’, ‘red’) : (’shoes’, ‘red’)]
+        * DataFrame columns can also be sliced. To do this, pass .loc[] two arguments: the rows to slice and the columns to slice, separated by a comma.
+            * sales.loc[‘shirt’ : ‘shoes’, ‘profit’: ]
+        * Slice twice: dogs_srt.loc[(“Labrador”, “Brown”):(“Schnauzer”, “Grey”), “name”:”height_cm”]
+        * Dates are sliced in the same way as other data types, by specifying a starting and ending data, separated by a colon.
+            * sales.loc[‘2021-04-28’:’2021-05-05’]
+        * You can slice by partial dates, such as months ,without specifying the days.
+            * sales.loc[‘2021-03’:’2021-04’]
+        * You can also slice use .iloc[], like .loc[], iloc[] dose not include the ending values in the slice.
+            * dogs.iloc[2:5, 1:4]
 
 
 
