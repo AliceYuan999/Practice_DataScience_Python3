@@ -94,7 +94,7 @@ Chapter 2: Aggregating Data
             * Sales.pivot_table(values=‘sold’, index=‘’type, columns= ‘color’, margins = True)
 
 Chapter 3 : Slicing and Indexing Data
-    1. Subsetting using slicing
+    1. Indexes and subsetting using indexes
         * .set_index() allows you to subset rows with less code.
             * sales.set_index(‘type’).head
             * temperatures_ind = temperatures.set_index('city')
@@ -120,8 +120,9 @@ Chapter 3 : Slicing and Indexing Data
         * To modify the sorting behaviour, pass the levels argument a list of levels in the order that they should be sorted. Then pass ascending a list of Booleans indicate the ordering direction for each level
             * sales.sort_index(level=[‘color’, ‘type’], ascending = [True, False])
 
+    2. Subsetting using slicing：
         * Similar to lists, DataFrame rows and columns can be sliced. To slice a DataFrame, the index must first be sorted busing .sort_index(). To slice rows at the outer index level, call .loc[] on the DataFrame and pass it the first and last index values separated by a :. Like lists, the final value is included in the slice.  #	You can only slice an index if the index is sorted (using .sort_index()).
-            * sales.loc[‘shoes’ : ‘shorts’]       #	To slice at the outer level, first and last can be strings. If you pass a single slice to .loc[], it will slice the rows
+            * sales.loc[‘shoes’ : ‘shorts’]       #To slice at the outer level, first and last can be strings. If you pass a single slice to .loc[], it will slice the rows
         * To slice inner index levels, you must pass the first and last index values as tuples. #To slice at inner levels, first and last should be tuples.
             * sales.loc[(‘shirt’, ‘red’) : (’shoes’, ‘red’)]
         * DataFrame columns can also be sliced. To do this, pass .loc[] two arguments: the rows to slice and the columns to slice, separated by a comma.
@@ -134,6 +135,26 @@ Chapter 3 : Slicing and Indexing Data
         * You can also slice use .iloc[], like .loc[], iloc[] dose not include the ending values in the slice.
             * dogs.iloc[2:5, 1:4]
 
+    3. working with pivot table 
+        * You can subset pivot tables in the same way as DataFrames with sorted indexes. To slice rows by their index, call .loc[] on the pivot table, passing it the row indexes to include in the slice.
+            * sales.loc[‘shirt’:’shoes’]
+        * To slice rows and columns by their index, pass .loc[] the row and column indexes to include in the slice, separated by a comma.
+            * sales.loc[’shirt’:’shoes’, ‘red’:’white’]
+        * DataFrame summary statistic methods, such as .mean() and .sum() can also be used with pivot tables. Each method has an axis argument, which by default, is set to ‘index’. This means that summary statistics are calculated for each column by default.
+            * sales.mean(axis=‘index’)
+        * To calculate a summary for each row, set axis=columns
+            * sales.mean(axis=‘columns’)
 
+        * To access the components, subset the data column and follow it with .dt.component
+            * dataframe["column"].dt.component
+        * To access the year components, subset the data column and follow it with .dt.year
+            * sales[‘data’].dt.year
+        * To access the month components, subset the data column and follow it with .dt.month
+            * sales[‘data’].dt.month
+        * Example:
+		# Pivot avg_temp_c by country and city vs year
+		temp_by_country_city_vs_year = temperatures.pivot_table(values='avg_temp_c', index=(['country', 'city']), columns='year')
+		# Subset in both directions at once
+		print(temp_by_country_city_vs_year.loc[('Egypt','Cairo'):('India','Delhi'),'2005':'2010'])
 
 
