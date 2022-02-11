@@ -157,4 +157,74 @@ Chapter 3 : Slicing and Indexing Data
 		# Subset in both directions at once
 		print(temp_by_country_city_vs_year.loc[('Egypt','Cairo'):('India','Delhi'),'2005':'2010'])
 
+   Chapter 4 : Creating and visualising Data
+    1. Plotting 
+        * Histogram 
+            * Example:
+		import matplotlib.pyplot as plt
+		sat_scores[‘math’].hist(bins=20)
+		plt.show()
+        * Bar plot
+            * Example :
+		import matplotlib.pyplot as plt
+		reading_by_borough = scores.groupby(‘Borough’)[‘reading’].mean
+		reading_by_borough.plot(kind=‘bar’, title=‘Avg. Reading SATs by Borough’)
+		plt.show()
+        * Line plot
+            * Example :
+		import matplotlib.pyplot as plt
+		# you can rotate the x-axis labels to improve readability by calling rot argument
+		mens_100m_times_year.plot(x = ‘year’, y = ‘time_s’, kind = ‘line’, rot = 45)
+		plt.show()
+        * Scatter plots
+            * Example:
+		import matplotlib.pyplot as plt
+		sat_scores.plot(x = ‘reading’, y = ‘writing’, kind=‘scatter’)
+		plt.show()
+        * Layering plots
+            * Example:
+		import matplotlib.pyplot as plt
+		sat_scores[‘reading’].hist(alpha=0.8)
+		sat_scores[‘writing’].hist(alpha=0.5)
+		# a plt.legend() be called to identify the layered plots by color
+		plt.legend([‘Avg. Reading SAT Score’, ‘Avg. Writing SAT Score’])
+		plt.show()
+
+    2. Handling missing data
+        * NaN represent missing values and calling the .isna() method on a DataFrame produces a Boolean for every value depending on whether the value is missing or not
+            * scores.isna().head()
+        * Chaining .isna() with .any() produces a Boolean for each column, indicating whether it contains missing data or not
+            * sat_scores.isna().any()
+        * Changing .isna() with .sum() counts the number of True values in each column.
+            * sat_scores.isna().sum()
+        * Chaining .isna() with .sum and .plot(kind=‘bar’) allows you to visualise the number of missing values in each column
+            * Example:
+		import matplotlib.pyplot as plt
+		sat_scores.isna().sum().plot(kind=‘bar’)
+		plt.show()
+
+        * .dropna() can remove any rows with missing values.
+            * sat_scores.dropna().head()
+        * .fillna() can replace NaN with another value.
+            * sat_scores.fillna().head()
+
+    3. Reading data into a DataFrame
+        * Creating DataFrame from a list of dictionaries
+            * Example 
+		import pandas as pd
+		list_of_dicts=[{k1:v1},{k2:v2},{k3:v3}]
+		data_frame=pd.DataFrame(list_of_dicts)
+        * Creating DataFrame from a list of dictionaries
+            * Example 
+		import pandas as pd
+		dict_of_list={‘a’:[],’b’:[],’c’:[]}
+		data_frame=pd.DataFrame(dict_of_list)
+        * Creating DataFrame from a CSV file
+            * Example 
+		import pandas as pd
+		data_frame=pd.read_csv(‘xxx.csv’)
+        * Writing CSV file: calling .to_csv() method on a DataFrame and passing it a file path as a string
+            * Example
+		data_frame.to_csv(‘data_frame.csv’)
+
 
