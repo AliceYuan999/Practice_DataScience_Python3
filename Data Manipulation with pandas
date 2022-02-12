@@ -1,4 +1,24 @@
-Data Manipulation with pandas
+3. Data Manipulation with pandas
+Content:
+1. Chapter 1: Transforming DataFrames
+    1. introducing DataFrames
+    2. Sorting and subsetting
+    3. New columns
+2. Aggregating DataFrames
+    1. Summary statistics
+    2. Counting 
+    3. Grouped summary statistics
+    4. Pivot tables
+3. Slicing and indexing DataFrames
+    1. Explicit indexes
+    2. Slicing and subsetting with .loc[] and .iloc[]
+    3. Working with pivot tables
+4. Creating and visualising DataFrames
+    1. Visualising your data
+    2. Missing values
+    3. Creating DataFrames
+    4. Reading and writing CSVs 
+
 Chapter 1 : DataFrames
     1. Sorting and subsetting 
         * .head() returns the first few rows (the “head” of the DataFrame).
