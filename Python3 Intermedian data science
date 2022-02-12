@@ -1,4 +1,29 @@
 Data Science Python3 Learning Blog:
+2. Intermedian to Python
+Content:
+1. Matplotlib 
+    1. Basic plots with matplotlib
+    2. Histogram
+    3. Customisation
+2. Dictionaries & Pandas
+    1. Dictionaries part 1
+    2. Dictionaries part 2
+    3. Pandas, part 1
+    4. Pandas, part 2
+3. Logic, control flow and filtering 
+    1. Comparison
+    2. Boolean operators
+    3. If, elif, else
+    4. Filtering pandas DataFrames
+4. Loop 
+    1. While loop
+    2. For loop
+    3. Loop data structures, part 1
+    4. Loop data structures , part2
+5. Case study
+    1. Random numbers
+    2. Random walk
+    3. Distribution
 
 Intermedian:
 1. Data visualisation : Explore Data and Visualise Data
