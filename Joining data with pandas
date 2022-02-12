@@ -1,0 +1,58 @@
+Python Learning Blog:
+
+4. Joining Data with pandas
+Contents:
+1. Data merging basics
+    1. Inner join
+    2. One-to-many relationships
+    3. Merging multiple DataFrames
+2. Merging table with different join types
+    1. Left join
+    2. Other joins
+    3. Merging a table to itself
+    4. Merging on indexes
+3. Advanced merging and concatenating 
+    1. Filtering joins
+    2. Concatenate DataFrames together vertically
+    3. Verifying integrity
+4. Merging ordered and time-series data
+    1. Using merge_ordered()
+    2. Using merge_asof()
+    3. Selecting data with .query()
+    4. Reshaping data with .melt()
+
+
+Chapter 1: Data merging basics
+    1. Inner join: .merge() which only returns rows where the values match in both tables.
+        * Example 
+			words = pd.read_csv(“words.csv”)
+			census = pd.read_csv(“census.csv”)
+			# since both wards and census have the index ‘ward’, then we merge these two files on ‘ward’
+			wards_census = wards.merge(census, on=‘ward’, suffixes = (‘_ward’, ‘_cen’))
+			print(wards_census.head(4))
+
+    2. One-to-many relationships:   .merge() with a one-to-many relationship, a row in the left table may be repeated if it is related to multiple rows in the right table. 
+        * exmaple: 
+			licenses_owners = licenses.merge(biz_owners, on="account")
+			grants.merge(licenses, on=[‘address’, ‘zip’])
+
+    3. Merging multiple DataFrames: 
+        * Three tables: 
+            * df1.merge(df2, on=‘col’)\
+		.merge(dfs, on=‘col’)
+        * Four tables:
+            * fd1.merge(df2, on=‘col’)\
+		.merge(df3, on=’col’)\
+		.merge(df4, on=‘col’)
+        * Example :
+		land_cen_lic = land_use.merge(census, on='ward') \
+                    						.merge(licenses, on='ward', suffixes=('_cen','_lic'))
+
+
+
+
+
+
+
+
+
