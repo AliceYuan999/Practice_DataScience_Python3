@@ -49,6 +49,29 @@ Chapter 1: Data merging basics
                     						.merge(licenses, on='ward', suffixes=('_cen','_lic'))
 
 
+Chapter 2: Merging table with different join types
+    1. Left join:  only rows from the right table matches left table will be returned.
+        1. Example 
+			df1.merge(df2, on=‘col’, how=‘left’)
+
+    2. Other joins:  
+        1.  Right joining: only rows from the left table matches right table will be returned.
+            1. Example : tv_movies = movies.merge(tv_genre, how=‘right’, left_on=‘id’, right_on=‘movie_id’)
+        2. Outer joining: will return all of the rows from both tables regardless if there is a match between the tables.
+            1. Example: family.merge(comedy, on=‘movie_id’, how=‘outer’, suffixes=(‘_fam’, ‘_com’))
+
+    3. Merging a table to itself:   Merging a table to itself can be useful when you want to compare values in a column to other values in the same column.
+            1. example: or_se=se.merge(se, left_on=‘sequel’, right_on=‘id’, suffixes=(‘_org’, ‘_seq’))
+
+    4. Merging on indexes:  both tables must match in each table to be returned in the result 
+        1. example: 
+		movies=pd.read_csv(’xxx.csv’, index_col=[‘id’])
+		movi_tag=movies.merge(taglines, on=‘id’, how=‘left’)
+        2. Multiindex merge:
+		sa_ca=samuel.merge(casts, on=[‘movie_if’, ‘cast_id’])
+        3. Index merge with left_on and right_on
+	movies_genres=movies.merge(movie_to_genres, left_on=‘id’, left_index=True, right_on=‘movie_id’, right_index=True)
+
 
 
 
