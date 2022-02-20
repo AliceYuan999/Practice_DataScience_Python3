@@ -99,6 +99,12 @@ Chapter 3: Advanced merging and concatenating
 		# .append() is a DataFrame method therefore, we list a df table first and then call the method.
 		df1.append([df2, df3], ignore_index=True, sort = True)
 
+    3. Verifying integrity:  .merge(validate=None), to check if merge is of specified type: ‘one_to_one’, ‘one_to_many’, ‘many_to_one’, ‘many_to_many’
+        1. Example:
+Df1.merge(df2, on=‘xx’, validate=‘one_to_one’)
+        # to check whether the new concatenated index contains duplicates
+        .contact(verify_integrity=False). # default value is False
+      2.Example: pd.contact([pd1, pd2], verify_integrity=True)
 
 
 
