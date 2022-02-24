@@ -101,10 +101,37 @@ Chapter 3: Advanced merging and concatenating
 
     3. Verifying integrity:  .merge(validate=None), to check if merge is of specified type: ‘one_to_one’, ‘one_to_many’, ‘many_to_one’, ‘many_to_many’
         1. Example:
-Df1.merge(df2, on=‘xx’, validate=‘one_to_one’)
+	Df1.merge(df2, on=‘xx’, validate=‘one_to_one’)
         # to check whether the new concatenated index contains duplicates
         .contact(verify_integrity=False). # default value is False
       2.Example: pd.contact([pd1, pd2], verify_integrity=True)
+
+Chapter 4: Merging ordered and time-series data
+    1. Using merge_ordered():
+        1. on, left_on and right_on
+        2. how, (left, right, inner, outer), default ‘outer’
+        3. suffixes
+        4. pd.merge_ordered(df1, df2)
+		example: 
+		import pandas as pd 
+		# the missing vale is replaced by previous value
+		df1_df2=pd.merge_ordered(df1, df2, on=‘xx’, suffixes=(‘_df1’, ‘_df2’), fill_method=‘ffill’) 
+		# Use the .corr() method on a DataFrame to compute the correlation matrix.
+		print(df1_df2.corr())
+
+    2. Using merge_asof():  similar to merge_ordered() left join with similar features as merge_ordered(), but match on the nearest key column and not exact matches. 
+        1. Example: 
+	# direction=‘forward’ means the ‘on’ key column is greater than or equal to the lefts’ key columns; the default is ‘backward’
+	pd.merge_asof(df1,df2, on=‘xxx’, suffixes=(‘_df1’, ‘_df2’), direction=‘forward’)
+
+    3. Selecting data with .query():  
+        1. df1.query(‘xx > 90 and qq < 140’)
+        2. df2.query(‘ xx ==“qq” or (xx==“zz” and yy < 90 )’)
+
+    4. Reshaping data with .melt():   
+        1. df.melt(id_vars=[‘xx’, ’zz’])
+        2. df.melt(id_vars=[‘xx’, ‘zz’], value_vars=[‘xx’, ’xx’])
+        3. df.melt(id_vars=[‘xx’, ‘zz’], value_vars=[‘xx’, ’xx’], var_name=[‘year’], value_name=‘xx’)
 
 
 
